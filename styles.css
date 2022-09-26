@@ -63,7 +63,7 @@ ul {
 }
 
 .top-banner form{
-    /* position: relative; */
+    position: relative;
     display: flex;
     align-items: center;
 }
@@ -172,8 +172,26 @@ ul {
     background: var(--text_light)
 }
 
-.ajax-section figcaption {
+.ajax-section .city sup {
+    font-size: 0.5em;
+}
+
+.ajax-section .city-temp {
+    font-size: 5rem;
+    font-weight: bold;
     margin-top: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    color: var(--text_dark)
+}
+
+.ajax-section .city-name sup {
+    padding: 0.2em 0.6em;
+    border-radius: 30px;
+    color: var(--text_light);
+    background: var(--orange);
+}
+
+.ajax-section .city-icon {
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
 }
