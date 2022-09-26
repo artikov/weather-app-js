@@ -3,14 +3,42 @@ const input = document.querySelector(".top-banner input")
 const msg = document.querySelector(".top-banner .msg")
 const list = document.querySelector(".ajax-section .cities")
 
-
-
-
+const API_KEY = "853e2452214d1620cbe2212c670a3271" // Do not use this key on your project!!!!!!!
 
 form.addEventListener("submit", e => {
     e.preventDefault()
     const inputVal = input.value
 
+    // Check if there's already a city on the list
+    const listItems = list.querySelectorAll(".ajax-section .city")
+    const listItemsArray = Array.from(listItems)
+
+    if (listItemsArray.length > 0 ){
+        const filteredArray = listItemsArray.filter(ele => {
+            let content = ""
+            if (inputVal.includes(",")){
+                if (inputVal.split(",")[1].length > 2){
+                    inputVal = inputVal.split(",")[0]
+                    content = ele
+                        .querySelector(".city-name span")
+                        .textContent.toLowerCase()
+                } else {
+                    content = ele.querySelector(".city-name").dataset.name.toLowerCase()
+                }
+            } else {
+                content = ele.querySelector(".city-name span").textContent.toLowerCase()
+            }
+            return content == inputVal.toLowerCase()
+        })
+
+        if (filteredArray.length > 0) {
+            msg.textContent = `The weather for ${filteredArray[0].querySelector(".city-name span").textContent} is already being displayed
+            ... or be more specific with country `
+            form.reset()
+            input.focus()
+            reutrn
+        }
+    }
 
     // SETTING UP OPENWEATHERMAP API
     const URL = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${API_KEY}`
